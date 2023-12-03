@@ -41,5 +41,5 @@ What if I can't make it?
 Don't worry, there will be more events and the work with the service will be ongoing for a long time. 
 More events will be announced in the beginning of next year. 
 
-Hope to see you soon! :santa: 🎅 :santa: 
+Hope to see you soon! 🎅 🎅 🎅
 

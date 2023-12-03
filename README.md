@@ -20,6 +20,9 @@ can pin locations for where they have seen Tunas in Sweden. For this we need som
   gathered data.
 * An AWS or GCP cluster where our service and database can be hosted.
 
+Oh, and one very important piece of this project is to come up with very, very cool names for our
+various repos/services.
+
 # Prerequisities 
 
 What are the prerequisites for me to participate? 

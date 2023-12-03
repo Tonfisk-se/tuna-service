@@ -31,7 +31,7 @@ None! All you need to do is to come as you are! Perhaps, contemplate a bit befor
 what you'd want to work with, or learn about, whether it's DevOps, front-end or back-end development or 
 enhance your SQL-skills. 
 
-The main idea of this is to be a fun, friendly project here you can get the chance of diving into some 
+The main idea of this is to be a fun, friendly project where you can get the chance of diving into some 
 area of Software development that you are interested in and want to learn, but don't have time to do at your 
 everyday workplace. Or don't find the motivation to dig into by yourself outside work hours. 
 

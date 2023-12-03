@@ -1,4 +1,5 @@
 # tuna-service
+
 The principal repository for Tonfisk.se
 
 # What the f### is this? 
@@ -17,7 +18,7 @@ can pin locations for where they have seen Tunas in Sweden. For this we need som
 * A  SQL database where we can store all the data.
 * At some later stage a back-end where we can  perform cool stuff (Statistics! ML!) on our
   gathered data.
-* A AWS or GCP cluster where our service and database can be hosted.
+* An AWS or GCP cluster where our service and database can be hosted.
 
 # Prerequisities 
 
@@ -26,6 +27,10 @@ What are the prerequisites for me to participate?
 None! All you need to do is to come as you are! Perhaps, contemplate a bit beforehand 
 what you'd want to work with, or learn about, whether it's DevOps, front-end or back-end development or 
 enhance your SQL-skills. 
+
+The main idea of this is to be a fun, friendly project here you can get the chance of diving into some 
+area of Software development that you are interested in and want to learn, but don't have time to do at your 
+everyday workplace. Or don't find the motivation to dig into by yourself outside work hours. 
 
 # When do we kick-off? 
 
@@ -36,5 +41,5 @@ What if I can't make it?
 Don't worry, there will be more events and the work with the service will be ongoing for a long time. 
 More events will be announced in the beginning of next year. 
 
-Hope to see you soon! :santa:
+Hope to see you soon! :santa: 🎅 :santa: 
 

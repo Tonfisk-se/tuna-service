@@ -38,8 +38,8 @@ everyday workplace. Or don't find the motivation to dig into by yourself outside
 
 # When do we kick-off? 
 
-You are invited to Tonfisk.se's Glögghackathon taking place at either 17/12 11:00, depending 
-on when most people can participate. The place will be either Erik's or Johan's place, both in Malmö. 
+You are invited to Tonfisk.se's Glögghackathon taking place at either 17/12 11:00. The place will be either 
+Erik's or Johan's place (TBD), both around Karlshamnsplan in Malmö. 
 
 What if I can't make it? 
 Don't worry, there will be more events and the work with the service will be ongoing for a long time. 

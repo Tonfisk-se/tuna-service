@@ -19,7 +19,7 @@ can pin locations for where they have seen Tunas in Sweden. For this we need som
 * At some later stage a back-end where we can  perform cool stuff (Statistics! ML!) on our
   gathered data.
 * An AWS or GCP cluster where our service and database can be hosted. Perhaps, we also want the
-  service to containerized, so perhaps Docker?
+  service containerized, so perhaps Docker?
 
 Oh, and one very important piece of this project is to come up with very, very cool names for our
 various repos/services.

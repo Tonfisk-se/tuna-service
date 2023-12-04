@@ -2,7 +2,7 @@
 
 The principal repository for Tonfisk.se
 
-# What the f### is this? 
+# What the frick is this? 
 
 you, who have recieved an invite may wonder. Well, Tonfisk.se is an open-source web service originated from 
 the founders' fascination for the Tuna and its return to the coastal waters of Sweden. 
@@ -18,7 +18,8 @@ can pin locations for where they have seen Tunas in Sweden. For this we need som
 * A  SQL database where we can store all the data.
 * At some later stage a back-end where we can  perform cool stuff (Statistics! ML!) on our
   gathered data.
-* An AWS or GCP cluster where our service and database can be hosted.
+* An AWS or GCP cluster where our service and database can be hosted. Perhaps, we also want the
+  service to containerized, so perhaps Docker?
 
 Oh, and one very important piece of this project is to come up with very, very cool names for our
 various repos/services.
@@ -37,7 +38,7 @@ everyday workplace. Or don't find the motivation to dig into by yourself outside
 
 # When do we kick-off? 
 
-You are invited to Tonfisk.se's Glögghackathon taking place at either 16/12 11:00 or 17/12 15:00, depending 
+You are invited to Tonfisk.se's Glögghackathon taking place at either 17/12 11:00, depending 
 on when most people can participate. The place will be either Erik's or Johan's place, both in Malmö. 
 
 What if I can't make it? 

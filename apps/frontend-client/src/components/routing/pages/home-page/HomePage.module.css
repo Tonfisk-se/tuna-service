@@ -1,0 +1,25 @@
+.leftColumn {
+  width: 22%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+.rightColumn {
+  width: 22%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.middleColumn {
+  width: 50%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem 2rem 2rem 2rem;
+  justify-content: space-between;
+}

@@ -1,13 +1,12 @@
 .header {
   height: 4rem;
-  background-color: cadetblue;
+  background-color: #9bb8cd;
   border-radius: 0 0 0.5rem 0.5rem;
   display: flex;
 }
 
 .title {
   flex: 1;
-  border-radius: 0 0.5rem 0.5rem 0.5rem;
 }
 
 .buttons {

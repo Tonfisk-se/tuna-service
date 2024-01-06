@@ -1,0 +1,11 @@
+.section {
+  padding-top: 0.5rem;
+  height: 20rem;
+  justify-content: center;
+  display: flex;
+  background-color: #eec759;
+  border-radius: 0.5rem;
+}
+.header {
+  font-size: 20;
+}

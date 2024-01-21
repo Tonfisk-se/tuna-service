@@ -1,0 +1,37 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Docker image
+        run: |
+          cd apps/frontend-client
+          docker build -t gcr.io/$GOOGLE_PROJECT_ID/frontend-client .
+          docker push gcr.io/$GOOGLE_PROJECT_ID/frontend-client
+
+      - name: Deploy to Cloud Run
+        env:
+          GOOGLE_CLOUD_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
+          GOOGLE_CLOUD_REGION: europe-wast1 # Change this to your preferred region
+        run: |
+          gcloud auth activate-service-account --key-file=<(echo "$GCLOUD_AUTH")
+          gcloud config set project $GOOGLE_CLOUD_PROJECT
+          gcloud config set run/region $GOOGLE_CLOUD_REGION
+          gcloud run deploy frontend-client --image gcr.io/$GOOGLE_PROJECT_ID/frontend-client --platform managed --allow-unauthenticated

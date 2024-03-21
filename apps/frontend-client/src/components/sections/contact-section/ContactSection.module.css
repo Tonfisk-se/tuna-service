@@ -1,0 +1,12 @@
+.section {
+  padding-top: 0.5rem;
+  margin-top: 2rem;
+  height: 20rem;
+  justify-content: center;
+  display: flex;
+  background-color: #ffc5c5;
+  border-radius: 0.5rem;
+}
+.header {
+  font-size: 20;
+}

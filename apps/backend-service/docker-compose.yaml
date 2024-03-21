@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: backend-service-c
+    image: backend-service-i
+    build:
+      context: .
+    ports:
+      - 8000:8000

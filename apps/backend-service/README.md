@@ -1,5 +1,5 @@
 ## Versions
 
-Python 3.12.0
+rustc 1.75.0
 
-Dependencies listed in requirements.txt
+dependencies listed in requirements.txt

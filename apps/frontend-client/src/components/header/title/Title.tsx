@@ -12,7 +12,7 @@ export const Title = () => {
     <>
       <div className={style.title}>
         <div className={style.span}>
-          <span onClick={onClick}>Tonfisk.se 🐟</span>
+          <span onClick={onClick}>Tonfisk.nu 🐟</span>
         </div>
       </div>
     </>

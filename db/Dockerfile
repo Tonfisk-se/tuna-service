@@ -1,5 +1,6 @@
-FROM postgres:latest
+FROM postgres:17.2
 
-ENV POSTGRES_USER=$(TUNA_DB_USER)
-ENV POSTGRES_PASSWORD=$(TUNA_DB_PASS)
-ENV POSTGRES_DB=$(TUNA_DB)
+COPY ./init_db.sh /docker-entrypoint-initdb.d/
+
+ENV POSTGRES_PASSWORD=postgres
+ENV POSTGRES_USER=postgres

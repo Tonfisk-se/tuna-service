@@ -1,0 +1,26 @@
+version: "3.9"
+
+
+services:
+
+
+    frontend-client:
+      build:
+        context: ./apps/frontend-client
+        dockerfile: Dockerfile
+      ports:
+        - "3000:3000"
+    tuna-db:
+      build:
+        context: ./db
+        dockerfile: Dockerfile
+      ports:
+        - "5432:5432"
+      volumes: 
+        - pg_data:/var/lib/postgresql/data
+      environment: 
+        - TUNA_DB_USER=$TUNA_DB_USER
+        - TUNA_DB_PASS=$TUNA_DB_PASS
+        - TUNA_DB_NAME=$TUNA_DB_NAME
+volumes:
+  pg_data:

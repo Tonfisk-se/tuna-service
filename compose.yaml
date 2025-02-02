@@ -10,15 +10,15 @@ services:
         dockerfile: Dockerfile
       ports:
         - "3000:3000"
-    tuna-db:
+    db:
       build:
         context: ./db
         dockerfile: Dockerfile
       ports:
         - "5432:5432"
-      volumes: 
+      volumes:
         - pg_data:/var/lib/postgresql/data
-      environment: 
+      environment:
         - TUNA_DB_USER=$TUNA_DB_USER
         - TUNA_DB_PASS=$TUNA_DB_PASS
         - TUNA_DB_NAME=$TUNA_DB_NAME

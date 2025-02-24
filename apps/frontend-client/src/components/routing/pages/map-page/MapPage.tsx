@@ -1,5 +1,11 @@
 import React from "react";
+import { getSightings, postSightings } from "src/utils/requests/methods";
 
 export const MapPage = () => {
-  return <span>this is the MapPage</span>;
+  return (
+    <>
+      <button onClick={() => getSightings()}>"Get Sightings"</button>
+      <button onClick={() => postSightings()}>"Post Sightings"</button>
+    </>
+  );
 };

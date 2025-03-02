@@ -6,7 +6,7 @@ services:
 
     frontend-client:
       build:
-        context: ./apps/frontend-client
+        context: ./services/frontend-client
         dockerfile: Dockerfile
       ports:
         - "3000:3000"

@@ -23,9 +23,9 @@ exports.up = (pgm) => {
                 notNull: true
             },
             time: {
-                type: 'timestamp',
+                type: 'timestamptz',
                 notNull: true,
-                default: pgm.func('current_time(0)')
+                default: pgm.func('current_timestamp(0)')
             },
             latitude: {
                 type: 'numeric',

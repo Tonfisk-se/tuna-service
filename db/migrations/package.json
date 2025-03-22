@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate:up": "node-pg-migrate up",
-    "migrate:down": "node-pg-migrate down",
-    "migrate:redo": "node-pg-migrate redo",
-    "migrate:create": "node-pg-migrate create"
+    "set-database-url": "set -a . ../../.env.development set +a",
+    "migrate:up": "npm run set-database-url && node-pg-migrate up",
+    "migrate:down": "npm run set-database-url && node-pg-migrate down",
+    "migrate:redo": "npm run set-database-url && node-pg-migrate redo",
+    "migrate:create": "npm run set-database-url && node-pg-migrate create"
   },
   "author": "johanfant",
   "license": "ISC",

@@ -1,6 +1,12 @@
 import express, { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import cors from "cors";
+import dotenv from 'dotenv';
+
+// Load environment variables based on the current environment
+const envFile = process.env.NODE_ENV === 'production' ? '../../.env.production' : '../../.env.development';
+dotenv.config({ path: envFile });
+
 
 interface Sighting {
   long: string;

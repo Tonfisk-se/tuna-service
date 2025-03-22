@@ -3,8 +3,10 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": ".",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "skipLibCheck": true
   }
 }

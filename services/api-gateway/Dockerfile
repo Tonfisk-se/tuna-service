@@ -5,8 +5,7 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm install
 COPY . .
-RUN npm run build
 
 # Expose the port for at which the app will run
-EXPOSE 3000:3000
+EXPOSE 4200:4200
 CMD ["npm", "start"]

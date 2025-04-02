@@ -21,11 +21,22 @@ services:
         - .env.development
         - .env.production
       healthcheck:
-        test: ["CMD", "pg_isready", "-q", "-d", "tuna_db", "-U", "tuna_db_user"]
+        test: ["CMD", "pg_isready", "-q", "-d", "tuna_db", "-U", "tuna_user"]
         timeout: 30s
         interval: 10s
         retries: 5
       restart: always
+    db-migration:
+      build:
+        context: ./db/migrations
+        dockerfile: Dockerfile
+      env_file:
+        - .env.development
+        - .env.production
+      depends_on:
+        db:
+          condition: service_healthy
+      command: ["npm", "run", "migrate:up"]
     api-gateway:
       build:
         context: ./services/api-gateway

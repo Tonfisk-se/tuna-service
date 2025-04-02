@@ -56,7 +56,7 @@ async function deleteSighting(idToDelete: string) {
     ).executeDelete();
 }
 
-describe('Test getSightingWithConditions()', () => {
+describe('getSightingWithConditions()', () => {
     test('Valid input parameters, all parameters', async () => {
         // Arrange
         const params = {
@@ -137,7 +137,7 @@ describe('Test getSightingWithConditions()', () => {
     })
 })
 
-describe('Test getAllSightings()', () => {
+describe('getAllSightings()', () => {
     test('getAllSightings', async () => {
         // Act
         const sightings = await queryHandler(getAllSightings);
@@ -148,7 +148,7 @@ describe('Test getAllSightings()', () => {
     })
 })
 
-describe('Test insertSighting()', () => {
+describe('insertSighting()', () => {
     test('Valid parameter input', async () => {
         // Arrange
         const params = {

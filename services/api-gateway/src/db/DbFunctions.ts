@@ -11,7 +11,7 @@ export async function getDbConnectionFromPool() {
 }
 
 export async function queryHandler(
-    callback: (conn: DBConnection, parameters?: Record<string, unknown>) => Record<string, unknown> | Array<Record<string, unknown>>,
+    dbFunction: (conn: DBConnection, parameters?: Record<string, unknown>) => Record<string, unknown> | Array<Record<string, unknown>>,
     parameters?: Record<string, unknown>
 ): Promise<Record<string, unknown> | Array<Record<string, unknown>>> {
     const connection = await getDbConnectionFromPool();
@@ -20,9 +20,9 @@ export async function queryHandler(
     try {
         if (parameters) {
             const typedParameters = parameters as { species: string, latitude: number, longitude: number }; // Type assertion
-            res = await callback(connection, typedParameters);
+            res = await dbFunction(connection, typedParameters);
         } else {
-            res = await callback(connection);
+            res = await dbFunction(connection);
         }
         connection.commit();
     } catch (exception) {

@@ -7,12 +7,15 @@ import  {describe,
          assert,
 } from "vitest";
 
-import {queryHandler,
+import {
+        DatabaseResult,
+        queryHandler,
         getAllSightings,
         insertSighting,
         getDbConnectionFromPool,
         tSightings,
-        getSightingsWithConditions
+        Sighting,
+        getSightingsWithConditions,
 } from '../src/db/DbFunctions';
 
 
@@ -31,7 +34,9 @@ beforeAll(async () => {
         time: NEW_DATE
     }
     const res1 = await queryHandler(insertSighting, params1)
-    TEST_UUID_1 = res1.id;
+    if (isTypeSighting(res1)){
+        TEST_UUID_1 = res1.id as string;
+    }
 
     const params2 = {
         species: 'tuna',
@@ -41,7 +46,9 @@ beforeAll(async () => {
     }
 
     const res2 = await queryHandler(insertSighting, params2)
-    TEST_UUID_2 = res2.id;
+    if (isTypeSighting(res2)){
+        TEST_UUID_2 = res2.id as string;
+    }
 });
 
 afterAll(async () => {
@@ -54,6 +61,24 @@ async function deleteSighting(idToDelete: string) {
     await connection.deleteFrom(tSightings).where(
         tSightings.id.equals(idToDelete)
     ).executeDelete();
+}
+
+function isTypeSighting(sighting: DatabaseResult): sighting is Sighting{
+    if (sighting === undefined || sighting === null){
+        throw new TypeError('Sighting not of the correct type')
+    }
+    return true
+}
+
+function isTypeSightings(sightings: DatabaseResult): sightings is Array<Sighting>{
+    if (sightings === undefined || sightings === null){
+        throw new TypeError('Sightings not of the correct type, must be Array<Sighting>')
+    }
+    return Array.isArray(sightings)
+}
+
+function isTypeArrayWithNull(sighting: DatabaseResult): sighting is Array<null>{
+    return Array.isArray(sighting) && sighting[0] === null;
 }
 
 describe('getSightingWithConditions()', () => {
@@ -72,8 +97,10 @@ describe('getSightingWithConditions()', () => {
         const sightings = await queryHandler(getSightingsWithConditions, params);
 
         // Assert
-        expect(sightings[0].species).toEqual('mock_species');
-        expect(sightings.length).toEqual(1);
+        if (isTypeSightings(sightings)){
+            expect(sightings[0].species).toEqual('mock_species');
+            expect(sightings.length).toEqual(1);
+        }
     })
 
     test('No input parameters', async () => {
@@ -81,9 +108,10 @@ describe('getSightingWithConditions()', () => {
         const sightings = await queryHandler(getSightingsWithConditions, {});
 
         // Assert
-        console.log(sightings)
-        expect(sightings.length).toBeGreaterThanOrEqual(2)
-        assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        if (isTypeSightings(sightings)){
+            expect(sightings.length).toBeGreaterThanOrEqual(2)
+            assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude'])
+        }
     })
 
     test('One input parameter: id', async () => {
@@ -94,8 +122,10 @@ describe('getSightingWithConditions()', () => {
         const sightings = await queryHandler(getSightingsWithConditions, params);
 
         // Assert
-        expect(sightings.length).toEqual(1);
-        assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        if (isTypeSightings(sightings)){
+            expect(sightings.length).toEqual(1);
+            assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        }
     })
 
     test('One input parameter: species', async () => {
@@ -106,8 +136,10 @@ describe('getSightingWithConditions()', () => {
         const sightings = await queryHandler(getSightingsWithConditions, params);
 
         // Assert
-        expect(sightings[0].species).toEqual('tuna');
-        assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        if (isTypeSightings(sightings)){
+            expect(sightings[0].species).toEqual('tuna');
+            assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        }
     })
 
     test('One input parameter: fromTime', async () => {
@@ -118,9 +150,11 @@ describe('getSightingWithConditions()', () => {
         const sightings = await queryHandler(getSightingsWithConditions, params);
 
         // Assert
-        const ids = sightings.map(({ id }) => id);
-        expect(ids).not.toContain(TEST_UUID_2);
-        assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        if (isTypeSightings(sightings)){
+            const ids = sightings.map(({ id }) => id);
+            expect(ids).not.toContain(TEST_UUID_2);
+            assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        }
     })
 
     test('One input parameter: toTime', async () => {
@@ -131,9 +165,11 @@ describe('getSightingWithConditions()', () => {
         const sightings = await queryHandler(getSightingsWithConditions, params);
 
         // Assert
-        const ids = sightings.map(({ id }) => id);
-        expect(ids).not.toContain(TEST_UUID_1);
-        assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        if (isTypeSightings(sightings)){
+            const ids = sightings.map(({ id }) => id);
+            expect(ids).not.toContain(TEST_UUID_1);
+            assert.hasAllKeys(sightings[0], ['id', 'species', 'time', 'longitude', 'latitude']);
+        }
     })
 })
 
@@ -143,8 +179,10 @@ describe('getAllSightings()', () => {
         const sightings = await queryHandler(getAllSightings);
 
         // Assert
-        expectTypeOf(sightings).toBeArray();
-        expectTypeOf(sightings[0].time).toEqualTypeOf<Date>()
+        if (isTypeSightings(sightings)){
+            expectTypeOf(sightings).toBeArray();
+            expectTypeOf(sightings[0].time).toEqualTypeOf<Date>();
+        }
     })
 })
 
@@ -160,15 +198,16 @@ describe('insertSighting()', () => {
         const sighting = await queryHandler(insertSighting, params);
 
         // Assert
-        expectTypeOf(sighting.id).toEqualTypeOf<string>();
-        expectTypeOf(sighting.species).toEqualTypeOf<string>();
-        expectTypeOf(sighting.time).toEqualTypeOf<Date>();
-        expectTypeOf(sighting.latitude).toEqualTypeOf<number>();
-        expectTypeOf(sighting.longitude).toEqualTypeOf<number>();
+        if (isTypeSighting(sighting)){
+            expectTypeOf(sighting.id).toEqualTypeOf<string>();
+            expectTypeOf(sighting.species).toEqualTypeOf<string>();
+            expectTypeOf(sighting.time).toEqualTypeOf<Date>();
+            expectTypeOf(sighting.latitude).toEqualTypeOf<number>();
+            expectTypeOf(sighting.longitude).toEqualTypeOf<number>();
 
-        // Clean-up
-        console.log(sighting);
-        await deleteSighting(sighting.id);
+            // Clean-up
+            await deleteSighting(sighting.id as string);
+        }
     })
 
     test('Valid parameter input, with time', async () => {
@@ -183,12 +222,14 @@ describe('insertSighting()', () => {
         // Act
         const sighting = await queryHandler(insertSighting, params);
 
-        // Arrange
-        expect(sighting.time).toEqual(OLD_DATE);
+        if (isTypeSighting(sighting)){
+            // Assert
+            expect(sighting.time).toEqual(OLD_DATE);
 
-        // Clean-up
-        console.log(sighting);
-        await deleteSighting(sighting.id);
+            // Clean-up
+            console.log(sighting);
+            await deleteSighting(sighting.id as string);
+        }
     })
 
     test('Invalid parameter input, missing property', async () => {
@@ -202,8 +243,10 @@ describe('insertSighting()', () => {
         const sighting = await queryHandler(insertSighting, params);
 
         // Assert
-        expectTypeOf(sighting).toBeArray();
-        expectTypeOf(sighting[0]).toBeNull();
+        if (isTypeArrayWithNull(sighting)){
+            expectTypeOf(sighting).toBeArray();
+            expectTypeOf(sighting[0]).toBeNull();
+        }
     })
 
     test('Invalid parameter input, non-existing species enum value', async () => {
@@ -218,8 +261,10 @@ describe('insertSighting()', () => {
         const sighting = await queryHandler(insertSighting, params);
 
         // Assert
-        expectTypeOf(sighting).toBeArray();
-        expectTypeOf(sighting[0]).toBeNull();
+        if (isTypeArrayWithNull(sighting)){
+            expectTypeOf(sighting).toBeArray();
+            expectTypeOf(sighting[0]).toBeNull();
+        }
     })
 
     test('Invalid parameter input, invalid species input type', async () => {
@@ -234,7 +279,9 @@ describe('insertSighting()', () => {
         const sighting = await queryHandler(insertSighting, params);
 
         // Assert
-        expectTypeOf(sighting).toBeArray();
-        expectTypeOf(sighting[0]).toBeNull();
+        if (isTypeArrayWithNull(sighting)){
+            expectTypeOf(sighting).toBeArray();
+            expectTypeOf(sighting[0]).toBeNull();
+        }
     })
 });

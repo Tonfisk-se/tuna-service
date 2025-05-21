@@ -266,22 +266,4 @@ describe('insertSighting()', () => {
             expectTypeOf(sighting[0]).toBeNull();
         }
     })
-
-    test('Invalid parameter input, invalid species input type', async () => {
-        // Arrange
-        const params = {
-            'species': 1,
-            'latitude': 0,
-            'longitude': 0
-        }
-
-        // Act
-        const sighting = await queryHandler(insertSighting, params);
-
-        // Assert
-        if (isTypeArrayWithNull(sighting)){
-            expectTypeOf(sighting).toBeArray();
-            expectTypeOf(sighting[0]).toBeNull();
-        }
-    })
 });

@@ -34,7 +34,7 @@ app.get("/sightings", (req, res) => {
   res.send("Here are the sightings");
 });
 
-app.post("/sighting", (req: Request<{}, {}, Sighting>, res: Response) => {
+app.post("/sighting", (req: Request<object, object, Sighting>, res: Response) => {
   const { long, lat, comment } = req.body;
   const dbEntry: DbEntry = {
     long,

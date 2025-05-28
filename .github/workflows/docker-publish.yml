@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build the docker compose stack
-        run: source .env.development && docker compose up -d
+        run: source .env.development && docker compose up
 
       - name: Move to api-gateway
         working-directory: services/api-gateway

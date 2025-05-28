@@ -30,6 +30,8 @@ app.use(
 );
 app.use(express.json());
 
+const unusedValue = 42;
+
 app.get("/sightings", (req, res) => {
   res.send("Here are the sightings");
 });

@@ -9,6 +9,8 @@ services:
         dockerfile: Dockerfile
       ports:
         - "3000:3000"
+      networks:
+        - frontend
     db:
       build:
         context: ./db
@@ -26,17 +28,22 @@ services:
         interval: 10s
         retries: 5
       restart: always
+      networks:
+        - backend
     db-migration:
       build:
         context: ./db/migrations
         dockerfile: Dockerfile
+      environment:
+        DATABASE_URL: postgres://tuna_user:itsatunasecret@db:5432/tuna_db
       env_file:
-        - .env.development
         - .env.production
       depends_on:
         db:
           condition: service_healthy
       command: npm run migrate:up
+      networks:
+        - backend
     api-gateway:
       build:
         context: ./services/api-gateway
@@ -47,6 +54,38 @@ services:
         db:
           condition: service_healthy
           restart: true
+      networks:
+        - frontend
+        - backend
+    keycloak:
+      image: quay.io/keycloak/keycloak:24.0.1
+      container_name: keycloak
+      restart: unless-stopped
+      environment:
+        KC_DB: postgres
+        KC_DB_URL_HOST: db
+        KC_DB_URL_PORT: 5432
+        KC_DB_URL_DATABASE: keycloak
+        KC_DB_USERNAME: keycloak
+        KC_DB_PASSWORD: keycloak
+        KC_HEALTH_ENABLED: true
+        KC_METRICS_ENABLED: true
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: admin
+      command: start-dev
+      ports:
+        - "8080:8080"
+      depends_on:
+        db:
+          condition: service_healthy
+      networks:
+        - frontend
+        - backend
 
 volumes:
   pg_data:
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
